@@ -2,6 +2,7 @@ package app
 
 import (
 	"log"
+	"lvl1/todo_http_server_with_json_storage/internal/database"
 	"lvl1/todo_http_server_with_json_storage/internal/middleware"
 	"lvl1/todo_http_server_with_json_storage/internal/todo"
 	"net/http"
@@ -10,10 +11,11 @@ import (
 
 type Server struct {
 	fullAddress string
+	db          *database.JsonDB
 }
 
 func CreateServer(address string, port int) *Server {
-	return &Server{fullAddress: address + ":" + strconv.Itoa(port)}
+	return &Server{fullAddress: address + ":" + strconv.Itoa(port), db: database.NewJsonDB("db.json")}
 
 }
 func (s Server) Start() {
