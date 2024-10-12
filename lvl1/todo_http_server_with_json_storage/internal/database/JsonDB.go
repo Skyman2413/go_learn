@@ -14,8 +14,13 @@ type JsonDB struct {
 	Jobs map[string]model.Job `json:"jobs"`
 }
 
-func NewJsonDB(path string) *JsonDB {
-	return &JsonDB{path: path, Jobs: make(map[string]model.Job)}
+var jsonDB *JsonDB = nil
+
+func GetJsonDB(path string) *JsonDB {
+	if jsonDB == nil {
+		return &JsonDB{path: path, Jobs: make(map[string]model.Job)}
+	}
+	return jsonDB
 }
 
 func (db *JsonDB) Load() {

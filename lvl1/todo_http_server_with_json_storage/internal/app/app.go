@@ -11,11 +11,11 @@ import (
 
 type Server struct {
 	fullAddress string
-	db          *database.JsonDB
 }
 
 func CreateServer(address string, port int) *Server {
-	return &Server{fullAddress: address + ":" + strconv.Itoa(port), db: database.NewJsonDB("db.json")}
+	database.GetJsonDB("db.json")
+	return &Server{fullAddress: address + ":" + strconv.Itoa(port)}
 
 }
 func (s Server) Start() {
